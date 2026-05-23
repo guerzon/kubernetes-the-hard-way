@@ -49,8 +49,8 @@ Generate a kubeconfig file suitable for authenticating as the `admin` user:
   kubectl config use-context kubernetes-the-hard-way
 }
 ```
-The results of running the command above should create a kubeconfig file in the default location `~/.kube/config` used by the  `kubectl` commandline tool. This also means you can run the `kubectl` command without specifying a config.
 
+The results of running the command above should create a kubeconfig file in the default location `~/.kube/config` used by the  `kubectl` commandline tool. This also means you can run the `kubectl` command without specifying a config.
 
 ## Verification
 

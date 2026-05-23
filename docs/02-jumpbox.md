@@ -17,10 +17,7 @@ All commands will be run as the `root` user. This is being done for the sake of 
 Now that you are logged into the `jumpbox` machine as the `root` user, you will install the command line utilities that will be used to preform various tasks throughout the tutorial.
 
 ```bash
-{
-  apt-get update
-  apt-get -y install wget curl vim openssl git
-}
+dnf install -y wget curl vim openssl git
 ```
 
 ### Sync GitHub Repository
@@ -55,8 +52,10 @@ In this section you will download the binaries for the various Kubernetes compon
 The binaries that will be downloaded are listed in either the `downloads-amd64.txt` or `downloads-arm64.txt` file depending on your hardware architecture, which you can review using the `cat` command:
 
 ```bash
-cat downloads-$(dpkg --print-architecture).txt
+cat downloads-amd64.txt
 ```
+
+**Lester's Note**: this has only been tested in AMD64/x86_64.
 
 Download the binaries into a directory called `downloads` using the `wget` command:
 
@@ -65,7 +64,7 @@ wget -q --show-progress \
   --https-only \
   --timestamping \
   -P downloads \
-  -i downloads-$(dpkg --print-architecture).txt
+  -i downloads-amd64.txt
 ```
 
 Depending on your internet connection speed it may take a while to download over `500` megabytes of binaries, and once the download is complete, you can list them using the `ls` command:
@@ -78,25 +77,24 @@ Extract the component binaries from the release archives and organize them under
 
 ```bash
 {
-  ARCH=$(dpkg --print-architecture)
   mkdir -p downloads/{client,cni-plugins,controller,worker}
-  tar -xvf downloads/crictl-v1.32.0-linux-${ARCH}.tar.gz \
+  tar -xvf downloads/crictl-v1.36.0-linux-amd64.tar.gz \
     -C downloads/worker/
-  tar -xvf downloads/containerd-2.1.0-beta.0-linux-${ARCH}.tar.gz \
+  tar -xvf downloads/containerd-2.2.4-linux-amd64.tar.gz \
     --strip-components 1 \
     -C downloads/worker/
-  tar -xvf downloads/cni-plugins-linux-${ARCH}-v1.6.2.tgz \
+  tar -xvf downloads/cni-plugins-linux-amd64-v1.9.1.tgz \
     -C downloads/cni-plugins/
-  tar -xvf downloads/etcd-v3.6.0-rc.3-linux-${ARCH}.tar.gz \
+  tar -xvf downloads/etcd-v3.7.0-beta.0-linux-amd64.tar.gz \
     -C downloads/ \
     --strip-components 1 \
-    etcd-v3.6.0-rc.3-linux-${ARCH}/etcdctl \
-    etcd-v3.6.0-rc.3-linux-${ARCH}/etcd
+    etcd-v3.7.0-beta.0-linux-amd64/etcdctl \
+    etcd-v3.7.0-beta.0-linux-amd64/etcd
   mv downloads/{etcdctl,kubectl} downloads/client/
   mv downloads/{etcd,kube-apiserver,kube-controller-manager,kube-scheduler} \
     downloads/controller/
   mv downloads/{kubelet,kube-proxy} downloads/worker/
-  mv downloads/runc.${ARCH} downloads/worker/runc
+  mv downloads/runc.amd64 downloads/worker/runc
 }
 ```
 
@@ -107,9 +105,7 @@ rm -rf downloads/*gz
 Make the binaries executable.
 
 ```bash
-{
-  chmod +x downloads/{client,cni-plugins,controller,worker}/*
-}
+chmod +x downloads/{client,cni-plugins,controller,worker}/*
 ```
 
 ### Install kubectl
@@ -119,9 +115,7 @@ In this section you will install the `kubectl`, the official Kubernetes client c
 Use the `chmod` command to make the `kubectl` binary executable and move it to the `/usr/local/bin/` directory:
 
 ```bash
-{
-  cp downloads/client/kubectl /usr/local/bin/
-}
+cp downloads/client/kubectl /usr/local/bin/
 ```
 
 At this point `kubectl` is installed and can be verified by running the `kubectl` command:

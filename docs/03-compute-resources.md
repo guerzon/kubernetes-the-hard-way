@@ -105,7 +105,7 @@ Set the hostname on each machine listed in the `machines.txt` file:
 
 ```bash
 while read IP FQDN HOST SUBNET; do
-    CMD="sed -i 's/^127.0.1.1.*/127.0.1.1\t${FQDN} ${HOST}/' /etc/hosts"
+    CMD="sed -i 's/^127.0.0.1.*/127.0.0.1\t${FQDN} ${HOST}/' /etc/hosts"
     ssh -n root@${IP} "$CMD"
     ssh -n root@${IP} hostnamectl set-hostname ${HOST}
     ssh -n root@${IP} systemctl restart systemd-hostnamed
@@ -177,18 +177,18 @@ cat /etc/hosts
 ```
 
 ```text
-127.0.0.1       localhost
-127.0.1.1       jumpbox
-
-# The following lines are desirable for IPv6 capable hosts
-::1     localhost ip6-localhost ip6-loopback
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
+# Loopback entries; do not change.
+# For historical reasons, localhost precedes localhost.localdomain:
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+# See hosts(5) for proper format and other examples:
+# 192.168.1.10 foo.example.org foo
+# 192.168.1.13 bar.example.org bar
 
 # Kubernetes The Hard Way
-XXX.XXX.XXX.XXX server.kubernetes.local server
-XXX.XXX.XXX.XXX node-0.kubernetes.local node-0
-XXX.XXX.XXX.XXX node-1.kubernetes.local node-1
+192.168.28.130 server.kubernetes.local server
+192.168.28.131 node-0.kubernetes.local node-0
+192.168.28.132 node-1.kubernetes.local node-1
 ```
 
 At this point you should be able to SSH to each machine listed in the `machines.txt` file using a hostname.
@@ -220,5 +220,13 @@ done < machines.txt
 ```
 
 At this point, hostnames can be used when connecting to machines from your `jumpbox` machine, or any of the three machines in the Kubernetes cluster. Instead of using IP addresses you can now connect to machines using a hostname such as `server`, `node-0`, or `node-1`.
+
+## Firewalld
+
+Disable and stop `firewalld` on all nodes:
+
+```bash
+systemctl disable --now firewalld
+```
 
 Next: [Provisioning a CA and Generating TLS Certificates](04-certificate-authority.md)
