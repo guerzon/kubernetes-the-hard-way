@@ -4,7 +4,7 @@ In this lab you will review the machine requirements necessary to follow this tu
 
 ## Virtual or Physical Machines
 
-This tutorial requires four (4) virtual or physical ARM64 or AMD64 machines running Debian 12 (bookworm). The following table lists the four machines and their CPU, memory, and storage requirements.
+This tutorial requires four (4) virtual or physical ARM64 or AMD64 machines running RHEL 10 (Coughlan). The following table lists the four machines and their CPU, memory, and storage requirements.
 
 | Name    | Description            | CPU | RAM   | Storage |
 |---------|------------------------|-----|-------|---------|
@@ -22,12 +22,14 @@ cat /etc/os-release
 You should see something similar to the following output:
 
 ```text
-PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
-NAME="Debian GNU/Linux"
-VERSION_ID="12"
-VERSION="12 (bookworm)"
-VERSION_CODENAME=bookworm
-ID=debian
+NAME="Red Hat Enterprise Linux"
+VERSION="10.2 (Coughlan)
+RELEASE_TYPE=stable
+ID="rhel"
+ID_LIKE="centos fedora"
+VERSION_ID="10.2"
+PLATFORM_ID="platform:el10"
+PRETTY_NAME="Red Hat Enterprise Linux 10.2 (Coughlan)"
 ```
 
 Next: [setting-up-the-jumpbox](02-jumpbox.md)

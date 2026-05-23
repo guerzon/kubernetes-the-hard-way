@@ -41,7 +41,7 @@ ssh root@node-1 <<EOF
 EOF
 ```
 
-## Verification 
+## Verification
 
 ```bash
 ssh root@server ip route
@@ -73,6 +73,5 @@ default via XXX.XXX.XXX.XXX dev ens160
 10.200.0.0/24 via XXX.XXX.XXX.XXX dev ens160 
 XXX.XXX.XXX.0/24 dev ens160 proto kernel scope link src XXX.XXX.XXX.XXX 
 ```
-
 
 Next: [Smoke Test](12-smoke-test.md)

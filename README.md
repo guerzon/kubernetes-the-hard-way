@@ -1,13 +1,16 @@
-# Kubernetes The Hard Way
+# Kubernetes The Hard Way (Red Hat Enterprise Linux)
 
 This tutorial walks you through setting up Kubernetes the hard way. This guide is not for someone looking for a fully automated tool to bring up a Kubernetes cluster. Kubernetes The Hard Way is optimized for learning, which means taking the long route to ensure you understand each task required to bootstrap a Kubernetes cluster.
 
 > The results of this tutorial should not be viewed as production ready, and may receive limited support from the community, but don't let that stop you from learning!
 
+## Lester's version
+
+This fork contains RHEL-specific steps. Version used was RHEL 10.2.
+
 ## Copyright
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
 
 ## Target Audience
 
@@ -19,10 +22,10 @@ Kubernetes The Hard Way guides you through bootstrapping a basic Kubernetes clus
 
 Component versions:
 
-* [kubernetes](https://github.com/kubernetes/kubernetes) v1.32.x
-* [containerd](https://github.com/containerd/containerd) v2.1.x
-* [cni](https://github.com/containernetworking/cni) v1.6.x
-* [etcd](https://github.com/etcd-io/etcd) v3.6.x
+* [kubernetes](https://github.com/kubernetes/kubernetes) v1.36.x
+* [containerd](https://github.com/containerd/containerd) v2.2.x
+* [cni](https://github.com/containernetworking/cni) v1.9.x
+* [etcd](https://github.com/etcd-io/etcd) v3.7.0
 
 ## Labs
 

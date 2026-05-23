@@ -20,6 +20,18 @@ The commands in this lab must be run on the `server` machine. Login to the `serv
 ssh root@server
 ```
 
+### SELinux
+
+SELinux is an integral part of RHEL security. While performing the steps in this tutorial, we would have to manage the SELinux configuration for each and every Kubernetes component.
+
+For the sake of this tutorial, let us set SELinux to `permissive` and reboot each node:
+
+```bash
+for host in server node-0 node-1; do
+  ssh root@${host} "sed -i 's/enforcing/permissive/' /etc/selinux/config; reboot"
+done
+```
+
 ## Bootstrapping an etcd Cluster
 
 ### Install the etcd Binaries
@@ -27,9 +39,7 @@ ssh root@server
 Extract and install the `etcd` server and the `etcdctl` command line utility:
 
 ```bash
-{
-  mv etcd etcdctl /usr/local/bin/
-}
+mv etcd etcdctl /usr/local/bin/
 ```
 
 ### Configure the etcd Server

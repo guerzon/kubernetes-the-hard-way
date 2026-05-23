@@ -56,10 +56,7 @@ ssh root@node-0
 Install the OS dependencies:
 
 ```bash
-{
-  apt-get update
-  apt-get -y install socat conntrack ipset kmod
-}
+dnf install -y socat conntrack ipset kmod
 ```
 
 > The socat binary enables support for the `kubectl port-forward` command.
